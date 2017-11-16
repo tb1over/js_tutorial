@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width,initial-scale = 1,user-scalable = 0">
+    <title>bootstrap</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="请输入地区zip-code">
+        <button id="search">查询</button>
+        <div class="info_weather">
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">地区</span>
+                <input class="loc" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">温度</span>
+                <input class="temp" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $("#search").click(function () {
+            var input_value = $("input").val();
+            $.ajax({
+                type: "GET",
+                url: "http://api.openweathermap.org/data/2.5/weather",
+                data: {
+                    appid: 'ab21b8f814629480b964369f72fb2d70',
+                    zip: input_value
+                },
+                // data: "zip=94040,us",
+                dataType: "json",
+                success: function (meg) {
+                    $(".loc").val("经度" + meg["coord"].lon + "纬度" + meg["coord"].lat);
+                    $(".temp").val(meg["main"].temp);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

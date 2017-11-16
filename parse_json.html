@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JSON实例</title>
+</head>
+
+<body>
+
+    <h2>为 JSON 字符串创建对象</h2>
+    <p id="demo"></p>
+    <script>
+        var text = '{"employees":[' +
+            '{"firstName":"John","lastName":"Doe" },' +
+            '{"firstName":"Anna","lastName":"Smith" },' +
+            '{"firstName":"Peter","lastName":"Jones" }]}';
+        obj = JSON.parse(text);
+        console.log('type of obj is:' + typeof obj);
+        console.log(obj);
+
+        let message = " ";
+        for (let i = 0; i < obj.employees.length; i++) {
+            message += obj.employees[i].firstName + " " + obj.employees[i].lastName + '<br />';
+        }
+        /*
+            obj.employees.forEach(element => {
+                message += element.firstName + " " + element.lastName + '<br />';
+            });
+        */
+        /*
+            for (const element of obj.employees) {
+                message += element.firstName + " " + element.lastName + '<br />';
+            }
+        */
+        /*
+            for (const key in obj.employees) {
+                message += obj.employees[key].firstName + " " + obj.employees[key].lastName + '<br />';     
+            }
+        */
+        document.getElementById("demo").innerHTML = message;
+    </script>
+
+</body>
+
+</html>
