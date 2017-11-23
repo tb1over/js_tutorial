@@ -506,3 +506,9 @@ child.parentNode.removeChild(child);
 [jQuery](http://jquery.com/)
 
 [zepto](http://zeptojs.com)
+
+[vue](https://cn.vuejs.org/v2/guide/)
+
+[react](https://react.bootcss.com/)
+
+[AngularJS](https://angularjs.org/)
