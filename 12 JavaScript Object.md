@@ -158,4 +158,168 @@ ECMA Script6标准中有Class的概念，并推荐使用。在ECMA Script5标准
 
 </html>
 ```
-https://www.w3cschool.cn/javascript/js-objects.html
+# 二、JavaScript内置对象
+
+## 1. Number 对象
+
+## 2. String对象
+String 对象用于处理已有的字符块。
+
+#### 1)JavaScript 字符串
+
+- 一个字符串用于存储一系列字符就像 "John Doe".
+- 一个字符串可以使用单引号或双引号：
+- 你使用位置（索引）可以访问字符串中任何的字符：
+```js
+var carname='Volvo XC60';
+var character=carname[7];
+```
+
+#### 2）对象方法
+- length方法
+```js
+var txt="Hello World!";
+document.write(txt.length);
+
+var txt="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+document.write(txt.length);
+```
+
+- indexOf()方法
+```js
+var str="Hello world, welcome to the universe.";
+var n=str.indexOf("welcome");
+```
+- match()方法
+
+用来查找字符串中特定的字符，并且如果找到的话，则返回这个字符。
+```js
+var str="Hello world!";
+document.write(str.match("world") + "<br>");
+document.write(str.match("World") + "<br>");
+document.write(str.match("world!"));
+```
+
+- replace() 方法
+```js
+str="Please visit Microsoft!"
+var n=str.replace("Microsoft","Google");
+```
+
+-  toUpperCase() / toLowerCase()方法
+```js
+var txt="Hello World!";       // String
+var txt1=txt.toUpperCase();   // txt1 is txt converted to upper
+var txt2=txt.toLowerCase();   // txt2 is txt converted to lower
+```
+
+- String to Array
+```js
+txt="a,b,c,d,e"   // String
+txt.split(",");   // Split on commas
+txt.split(" ");   // Split on spaces
+txt.split("|");   // Split on pipe 
+```
+- 其他属性及方法
+    - length
+    - prototype
+    - constructor
+    - charAt()
+    - charCodeAt()
+    - concat()
+    - fromCharCode()
+    - indexOf()
+    - lastIndexOf()
+    - match()
+    - replace()
+    - search()
+    - slice()
+    - split()
+    - substr()
+    - substring()
+    - toLowerCase()
+    - toUpperCase()
+    - valueOf()
+
+具体请查阅手册
+
+## 3. Date对象
+日期对象用于处理日期和时间。
+
+[Date对象参考地址](https://www.w3cschool.cn/jsref/jsref-obj-date.html)
+#### 1）创建日期
+```js
+ new Date() // 当前日期和时间
+ new Date(milliseconds) //返回从 1970 年 1 月 1 日至今的毫秒数
+ new Date(dateString)
+ new Date(year, month, day, hours, minutes, seconds, milliseconds)
+```
+#### 2) 设置日期
+```js
+ var myDate=new Date();
+ myDate.setFullYear(2010,0,14);
+
+var myDate=new Date();
+ myDate.setDate(myDate.getDate()+5);
+```
+
+#### 3）日期比较
+```js
+var x=new Date();
+x.setFullYear(2100,0,14);
+var today = new Date();
+
+if (x>today){
+   alert("Today is before 14th January 2100");
+}else{
+   alert("Today is after 14th January 2100");
+}
+```
+
+## 4. Array对象
+数组对象的作用是：使用单独的变量名来存储一系列的值。
+
+#### 1)创建数据
+```js
+ var myCars=new Array(); 
+ myCars[0]="Saab";       
+ myCars[1]="Volvo";
+ myCars[2]="BMW";
+
+ var myCars=new Array("Saab","Volvo","BMW");
+
+ var myCars=["Saab","Volvo","BMW"];
+```
+
+#### 2)访问元素
+```js
+var name=myCars[0];
+
+myCars[0]="Opel";
+
+//注意数组的下标不像其他语言中的下标是数字，而是字符串'0', '1', '2'.....
+```
+
+#### 3)在一个数组中你可以有不同的对象
+```js
+myArray[0]=Date.now;
+ myArray[1]=myFunction;
+ myArray[2]=myCars;
+```
+
+#### 4) 数组方法和属性
+```js
+ var x=myCars.length             // the number of elements in myCars
+ var y=myCars.indexOf("Volvo")   // the index position of "Volvo"
+```
+
+#### 5)创建新方法
+```js
+Array.prototype.ucase=function(){
+    for (i=0;i<this.length;i++){
+      this[i]=this[i].toUpperCase();
+    }
+}
+```
+#### 6)完整参考手册
+[手册地址](https://www.w3cschool.cn/jsref/jsref-obj-array.html)
