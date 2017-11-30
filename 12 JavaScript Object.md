@@ -323,3 +323,79 @@ Array.prototype.ucase=function(){
 ```
 #### 6)完整参考手册
 [手册地址](https://www.w3cschool.cn/jsref/jsref-obj-array.html)
+
+## 5. Boolean对象
+Boolean对象用于将非布尔值转化为布尔值(true/false).
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Boolean</title>
+</head>
+
+<body>
+    <script>
+        var b1 = new Boolean(0);
+        var b2 = new Boolean(1);
+        var b3 = new Boolean("");
+        var b4 = new Boolean(null);
+        var b5 = new Boolean(NaN);
+        var b6 = new Boolean("false");
+        document.write("0 为布尔值 " + b1 + "<br>");
+        document.write("1 为布尔值 " + b2 + "<br>");
+        document.write("空字符串是布尔值 " + b3 + "<br>");
+        document.write("null 是布尔值 " + b4 + "<br>");
+        document.write("NaN 是布尔值 " + b5 + "<br>");
+        document.write("字符串'false' 是布尔值" + b6 + "<br>");
+    </script>
+</body>
+</html>
+```
+[完整的Boolean对象参考](https://www.w3cschool.cn/jsref/jsref-obj-boolean.html)
+## 6. JavaScript RegExp 对象
+正则表达式(Regular Expression)是一种文本模式，包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为"元字符"）。
+正则表达式使用单个字符串来描述、匹配一系列匹配某个句法规则的字符串。
+```js
+var str = 'abc123def';
+var patt = /[0-9]+/;
+document.write(str.match(patt1));
+```
+#### 1)简介
+大家有没有使用过通配符的经验，在windows系统中想搜索所有以“2017”开始的文件。
+- 通配符*
+- 通配符?
+而正则表达式是一种更加强大、灵活的字符串处理模块。
+
+一个更直观的例子
+
+![](http://www.runoob.com/wp-content/uploads/2014/03/CEBB49BB-B1AD-4539-AC7A-B40DDC62D1B2.jpg)
+- ^为匹配输入字符串的开始位置。
+- [0-9]+匹配多个数字， [0-9] 匹配单个数字，+ 匹配一个或者多个。
+- abc$匹配字母 abc 并以 abc 结尾，$ 为匹配输入字符串的结束位置。
+```js
+var str = "123abc";
+var patt1 = /^[0-9]+abc$/; // /^[0-9]+/  ; /^[0-9]/ 
+document.write(str.match(patt1));   //123abc
+```
+```js
+var str = "mn12abc";
+var patt1 = /[0-9]+[a-z]*$/;
+document.write(str.match(patt1));
+```
+为什么要使用正则表达式？
+- 测试字符串内的模式。
+例如，可以测试输入字符串，以查看字符串内是否出现电话号码模式或信用卡号码模式。这称为数据验证。
+- 替换文本。
+可以使用正则表达式来识别文档中的特定文本，完全删除该文本或者用其他文本替换它。
+- 基于模式匹配从字符串中提取子字符串。
+可以查找文档内或输入域内特定的文本。
+
+#### 2)参考资料
+[MDN 正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+[博客园 ](https://www.cnblogs.com/moqing/archive/2016/07/13/5665126.html)
+
+[W3C School](https://www.w3cschool.cn/javascript/js-obj-regexp.html)
+
