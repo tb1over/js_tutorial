@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(first, last, age, gender, interests){
+            this.first = first;
+            this.last = last;
+            this.age  = age;
+            this.gender = gender;
+            this.interests = interests;
+
+            this.toString = function(){
+                console.log(this.first + this.last);
+            }
+        }
+        Person.prototype.hello = function(){        //原型方法
+            alert(this.age);
+        };
+
+        var person1 = new Person('c', 'c', 32, 'male', ['reading', 'writting']);
+
+        /*
+        console.log(person1);
+        console.log(person1.__proto__);      // Person.prototype
+        console.log(Person.prototype);
+        console.log(person1.__proto__.__proto__);
+        */
+
+        /*
+        //2.Object.create
+        var person2 = Object.create(person1);//以person1为原型对象创建person2
+        
+        console.log(person2.__proto__);
+        
+        //3.constructor属性
+        console.log(person1.constructor);       //Person()构造函数
+        console.log(person2.constructor);       //Person()构造函数
+
+        var person3 = new person1.constructor('m', 'n', 26, 'female', ['playing drums']);
+        console.log(person3.first + person3.last + person3.gender);
+        */
+
+        console.log(person1.constructor.name);      //Person
+    </script>
+</body>
+</html>
