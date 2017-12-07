@@ -133,7 +133,62 @@ Web应用程序中的服务器监听来自客户端的请求。 设置HTTP服务
 ![](http://p0.qhimg.com/t01c360c3a400b88362.png)
 
 
-# 三、HTTP/HTTPS协议
+# 三、HTTP协议
+## 1. 简介
+HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:World Wide Web ）服务器传输超文本到本地浏览器的传送协议。
+
+HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。
+
+![](http://upload-images.jianshu.io/upload_images/2964446-5a35e17f298a48e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+## 2. URL/URI
+URL,全称是UniformResourceLocator, 中文叫统一资源定位符,是互联网上用来标识某一处资源的地址;
+
+URI,统一资源标识符（Uniform Resource Identifiers),用来标示一个资源.
+
+区别与联系：URL是一种具体的URI,URL不止标示出了资源，而且还指明了如何Locate这个资源。
+
+## 3. HTTP Request
+### 3.1 request headers
+
+- Accept
+- Accept-Encoding
+- Host
+- User-Agent
+- ...... 
+
+### 3.2 request method
+- GET
+- POST
+- PUT
+- DELETE
+- TRACE
+- HEAD
+
+### 4. HTTP Response
+
+### 4.1 Response headers
+
+- Cache-Control
+- Date
+- ......
+
+###  4.2 Status Codes
+- 2**
+- 3**
+- 4**
+- 5**
+
+```js
+常见状态代码、状态描述、说明：
+200 OK      //客户端请求成功
+400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
+401 Unauthorized //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 
+403 Forbidden  //服务器收到请求，但是拒绝提供服务
+404 Not Found  //请求资源不存在，eg：输入了错误的URL
+500 Internal Server Error //服务器发生不可预期的错误
+503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
+```
 
 # 四、一些例子
 
