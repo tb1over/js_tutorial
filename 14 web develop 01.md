@@ -24,6 +24,7 @@
         - [2.2.1 客户端(Browser)](#221-客户端browser)
         - [2.2.2 服务器(Server)](#222-服务器server)
         - [2.2.3 数据库(DataBase)](#223-数据库database)
+            - [2.2.3 Web应用结构示意](#223-web应用结构示意)
 - [三、HTTP/HTTPS协议](#三httphttps协议)
 - [四、一些例子](#四一些例子)
 - [五、参考资料](#五参考资料)
@@ -118,10 +119,18 @@ Web应用程序中的服务器监听来自客户端的请求。 设置HTTP服务
     - MongoDB
     - Redis 
     - ......
-    
+
+![](https://github.com/tb1over/js_tutorial/blob/master/img/DB-Engines%20Ranking.jpg?raw=true)
+
 各大数据库使用情况。[DB-Engines Ranking](https://db-engines.com/en/ranking)
 
 
+#### 2.2.3 Web应用结构示意
+![](http://p0.qhimg.com/t017ec73fc3eddd9971.png)
+
+![](http://p0.qhimg.com/t01a36cc19ec9076f2f.png)
+
+![](http://p0.qhimg.com/t01c360c3a400b88362.png)
 
 
 # 三、HTTP/HTTPS协议
