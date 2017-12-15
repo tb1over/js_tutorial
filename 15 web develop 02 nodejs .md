@@ -182,12 +182,32 @@ router可以理解为一个容器，或者说一种机制，它管理了一组ro
 ```
 https://www.imooc.com/learn/488
 ```
+```
+
+```
 ```js
 /users        ->  getAllUsers()
 /users/count  ->  getUsersCount()
 ```
 
+```
+                               url.parse(string).query
+                                           |
+           url.parse(string).pathname      |
+                       |                   |
+                       |                   |
+                     ------ -------------------
+http://localhost:8888/start?foo=bar&hello=world
+                                ---       -----
+                                 |          |
+                                 |          |
+              querystring(string)["foo"]    |
+                                            |
+                         querystring(string)["hello"]
+```
+- url 模块
 
+- querystring模块
 
 
 

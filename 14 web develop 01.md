@@ -241,5 +241,6 @@ At the most basic level, whenever a browser needs a file hosted on a web server,
 
 # 7. 作业
 
-1. 写一篇使用chrome(firefox...)浏览器对某个URL的调试访问过程(GET/POST)，要求分析HTTP协议通信过程，分析请求信息、响应信息、使用的HTTP方法。
-2. 翻译参考资料3中维基百科关于Web Server的定义。
+-  写一篇使用chrome(firefox...)浏览器对某个URL的调试访问过程(GET/POST)，要求分析HTTP协议通信过程，分析请求信息、响应信息、使用的HTTP方法。
+-  翻译参考资料3中维基百科关于Web Server的定义。
+- HTTP方法的详细作用、使用场景，比如HTTP GET与HTTP POST
