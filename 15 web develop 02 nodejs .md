@@ -516,6 +516,7 @@ exports.upload = upload;
 
 ## 1. 在自己计算机搭建NodeJS开发环境
 * 安装NodeJS，官网下载
+* 建议的开发工具vscode
 * 搞清楚、会用nvm工具进行NodeJS版本管理
 * 详细了解、会使用npm进行模块安装
 
