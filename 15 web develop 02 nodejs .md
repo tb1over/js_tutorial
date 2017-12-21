@@ -37,7 +37,7 @@ NodeJS有Windows版本，Linux版本，Mac版本，请根据自己操作系统�
 // node helloworld.js
 console.log("Hello World");
 ```
-**是不是非常简单呢？？**但是也很无聊。
+**是不是非常简单呢？？但是也很无聊。**
 
 # 3. 完整的基于NodeJS的web应用
 接下来的案例将持续很长时间，通过持续的迭代改进。
@@ -75,7 +75,7 @@ console.log('Server running at 8888');
 ## 4.1 分析一下这个简单的程序
 - 第一行请求（require）Node.js自带的 http 模块，并且把它赋值给 http 变量。 关于Nodejs HTTP模块详情，请查阅 - [HTTP 模块API文档](http://nodejs.cn/api/http.html#http_http).
 
-- 接下来我们调用http模块提供的函数： createServer 。这个函数会返回一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数，指定这个HTTP服务器监听的端口号。
+- 接下来调用http模块提供的函数： createServer 。这个函数会返回一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数，指定这个HTTP服务器监听的端口号。
 
 - 最有趣（也是最不好理解，也是Nodejs的核心思想，也是Nodejs最有魅力，同时也是Nodejs程序的地狱）的部分是 createServer() 的第一个参数，一个函数定义.  
 
@@ -97,7 +97,7 @@ function execute(someFunction, value) {
 }
 execute(function(word){ console.log(word) }, "Hello");
 ```
- 在 execute 接受第一个参数的地方直接定义了我们准备传递给 execute 的函数。用这种方式，我们甚至不用给这个函数起名字，这也是为什么它被叫做 *匿名函数* 。 
+ 在 execute 接受第一个参数的地方直接定义了准备传递给 execute 的函数。用这种方式，甚至不用给这个函数起名字，这也是为什么它被叫做 *匿名函数* 。 
 
  **see again**
 
@@ -115,7 +115,7 @@ http.createServer(onRequest).listen(8888);
 
  ## 4.2 基于事件驱动的回调
  基于事件驱动的回调是Node.js原生的工作方式。它是事件驱动的，这也是它为什么这么快的原因。
-- 传统的web server多为基于线程模型。你启动Apache或者什么server，它开始等待接受连接。当收到一个连接，server保持连接连通直到页面或者什么事务请求完成。如果他需要花几微妙时间去读取磁盘或者访问数据库，web server就阻塞了IO操作（这也被称之为阻塞式IO).想提高这样的web server的性能就只有启动更多的server实例
+- 传统的web server多为基于线程模型。启动Apache或者什么server，它开始等待接受连接。当收到一个连接，server保持连接连通直到页面或者什么事务请求完成。如果他需要花几微妙时间去读取磁盘或者访问数据库，web server就阻塞了IO操作（这也被称之为阻塞式IO).想提高这样的web server的性能就只有启动更多的server实例
 - Node.js使用事件驱动模型，当web server接收到请求，就把它关闭然后进行处理，然后去服务下一个web请求。当这个请求完成，它被放回处理队列，当到达队列开头，这个结果被返回给用户。这个模型非常高效可扩展性非常强，因为webserver一直接受请求而不等待任何读写操作。（这也被称之为非阻塞式IO或者事件驱动IO）
 
 - 服务员给顾客点餐的例子。
@@ -132,7 +132,7 @@ http.createServer(onRequest).listen(8888);
 
 - 当回调启动，onRequest() 函数被触发的时候，有两个参数被传入： request 和 response 。
 
-- 它们是对象，你可以使用它们的方法来处理HTTP请求的细节，并且响应请求（比如向发出请求的浏览器发回一些东西）。
+- 它们是对象，可以使用它们的方法来处理HTTP请求的细节，并且响应请求（比如向发出请求的浏览器发回一些东西）。
 
 - 所以：当收到请求时，使用 response.writeHead() 函数发送一个HTTP状态200和HTTP头的内容类型（content-type），使用 response.write() 函数在HTTP相应主体中发送文本“Hello World"。
 
@@ -182,14 +182,10 @@ router可以理解为一个容器，或者说一种机制，它管理了一组ro
 ```
 https://www.imooc.com/learn/488
 ```
-```
-
-```
 ```js
 /users        ->  getAllUsers()
 /users/count  ->  getUsersCount()
 ```
-
 ```
                                url.parse(string).query
                                            |
@@ -201,14 +197,329 @@ http://localhost:8888/start?foo=bar&hello=world
                                 ---       -----
                                  |          |
                                  |          |
-              querystring(string)["foo"]    |
+        querystring.parse(string)["foo"]    |
                                             |
-                         querystring(string)["hello"]
+                         querystring.parse(string)["hello"]
 ```
 - url 模块
-
 - querystring模块
+```js
+//代码演示一下上图的URL该如何解析
+let http = require("http");
+let url = require('url');
+let querystring = require('querystring');
+
+function start() {
+  function onRequest(request, response) {
+
+    console.log(`request url: ${request.url}`);
+
+    pathname = url.parse(request.url).pathname;
+
+    console.log(`pathname: ${pathname}`);
+
+    qs = url.parse(request.url).query;
+    console.log(`qs: ${qs}`);
+
+    console.log(`foo: ${querystring.parse(qs)['foo']}`);
+
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(9999);
+  console.log("Server has started at 9999.");
+}
+exports.start = start
+```
+**现在可以通过请求的URL路径来区别不同请求了--以使用路由（还未完成）来将请求以URL路径为基准映射到处理程序上。**
+
+下面将来自/start和/upload的请求使用不同的代码来处理。
+
+## 5.2 创建路由文件
+
+* 1.建立名为router.js的文件
+```js
+
+function route(pathname) {
+    console.log("About to route a request for " + pathname);
+  }
+  
+exports.route = route;
+```
+* 2.扩展一下服务器的start()函数，将路由函数作为参数传递过去
+```js
+//server.js
+let http = require("http");
+let url = require('url');
+let querystring = require('querystring');
+
+function start(route) {
+  function onRequest(request, response) {
+
+    pathname = url.parse(request.url).pathname;
+
+    route(pathname);
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(9999);
+  console.log("Server has started at 9999.");
+}
+exports.start = start
+```
+* 3.扩展index.js，使得路由函数可以被注入到服务器中
+```js
+//index.js
+var server = require("./server");
+var router = require('./router');
+
+server.start(router.route);
+```
+
+## 5.3 路由给真正的请求处理程序
+
+针对不同的URL有不同的处理方式。例如处理/start的“业务逻辑”就应该和处理/upload的不同。
+
+* 创建一个叫做requestHandlers的模块，并对于每一个请求处理程序，添加一个占位用函数，随后将这些函数作为模块的方法导出：
+
+```js
+//requestHandlers.js
+function start() {
+    console.log("Request handler 'start' was called.");
+}
+  
+function upload() {
+    console.log("Request handler 'upload' was called.");
+}
+  
+exports.start = start;
+exports.upload = upload;
+```
+* 将导出对象引入到主文件index.js中
+```js
+//index.js
+var server = require("./server");
+var router = require('./router');
+var requestHandlers = require('./requestHandlers');
+
+var handler = {};   //对象
+handler['/'] = requestHandlers.start;
+handler['/start'] = requestHandlers.start;
+handler['upload'] = requestHandlers.upload;
+
+//handler 关联对象数据
+server.start(router.route);
+```
+将不同的URL映射到相同的请求处理程序上是很容易的：只要在对象中添加一个键为"/"的属性，对应requestHandlers.start即可，这样我们就可以干净简洁地配置/start和/的请求都交由start这一处理程序处理。
+
+* server模块修改
+```js
+//server.js
+...
+route(handle, pathname);
+...
+```
+
+* router.js文件中修改route()函数
+```js
+//route.js
+
+function route(pathname, handler) {
+    console.log("About to route a request for " + pathname);
+
+    if(typeof handler[pathname] === 'function'){
+        handler[pathname]();        //调用路由处理函数
+    }
+  }
+  
+exports.route = route;
+```
+
+## 5.4 让请求处理程序作出响应
+目前的程序，不论请求路径是/start还是/upload，页面响应都是hello world!  
+
+Too young too simple ...
+
+其实“处理请求”说白了就是“对请求作出响应”，因此，需要让请求处理程序能够像onRequest函数那样可以和浏览器进行“对话”。
+
+之前对请求作出响应，都是在server.js模块完成。这部分工作不该是由requestHandlers完成吗？？？
+
+对以下代码进程重构
+```js
+//requstHandlers.js
+function start() {
+    console.log("Request handler 'start' was called.");
+    return 'hello start!';
+}
+  
+function upload() {
+    console.log("Request handler 'upload' was called.");
+    return 'hello upload!';
+}  
+exports.start = start;
+exports.upload = upload;
+```
+
+```js
+// route.js
+
+function route(pathname, handler) {
+    console.log("About to route a request for " + pathname);
+
+    if(typeof handler[pathname] === 'function'){
+        return handler[pathname]();        //调用路由处理函数
+    }else{
+        console.log("No request handler found for " + pathname);
+        return "404 Not found";
+    }
+  }
+  
+exports.route = route;
+```
+
+```js
+// server.js
+...
+function start(route, handle) {
+  function onRequest(request, response) {
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    var content = route(handle, pathname)
+    response.write(content);
+    response.end();
+  }
+...
+```
+**代码有问题吗？？看似没问题，但是涉及到了致命问题：**
+## 5.5 阻塞与非阻塞
+修改一下代码,注意观察在访问/start 和/upload的现象，这个现象为什么会发生，就是因为阻塞。
+
+形象的说就是“它阻塞了所有其他的处理工作”。
+```js
+// requestHandlers.js
+function start() {
+  console.log("Request handler 'start' was called.");
+  
+  function sleep(milliSeconds) {
+    var startTime = new Date().getTime();
+    while (new Date().getTime() < startTime + milliSeconds);
+  }
+
+  sleep(20000);
+  return "Hello Start";
+}
+function upload() {
+  console.log("Request handler 'upload' was called.");
+  return "Hello Upload";
+}
+exports.start = start;
+exports.upload = upload;
+```
+
+Node.js可以在不新增额外线程的情况下，依然可以对任务进行并行处理 —— Node.js是单线程的。它通过事件轮询（event loop）来实现并行操作，对此，我们应该要充分利用这一点 —— 尽可能的避免阻塞操作，取而代之，多使用非阻塞操作。
+
+然而，要用非阻塞操作，我们需要使用回调，通过将函数作为参数传递给其他需要花时间做处理的函数（比方说，休眠10秒，或者查询数据库，又或者是进行大量的计算）。
+
+**什么是非阻塞**
+
+对于Node.js来说，它是这样处理的：“嘿，probablyExpensiveFunction()（这里指的就是需要花时间处理的函数），你继续处理你的事情，我（Node.js线程）先不等你了，我继续去处理你后面的代码，请你提供一个callbackFunction()，等你处理完之后我会去调用该回调函数的，谢谢！”
+
+修改代码，使用回调函数继续模拟这个过程。
+```js
+
+function start() {
+    console.log("Request handler 'start' was called.");
+    let res = 'empty';
+    setTimeout(function(){
+        res = 'hello start!';
+    }, 10000);
+    return res;
+}
+......
+```
+会发生什么事情呢？
+
+不再阻塞了，但是请求/或者/start没有得到正确的输出结果。
+
+**正确的姿势：不能使用返回值，给客户端的响应应该是在requstHandler模块中完成，而不是在server模块中响应**
+
+## 5.6 以非阻塞操作进行请求响应
+继续重构：将response对象（从服务器的回调函数onRequest()获取）通过请求路由传递给请求处理程序。 随后，处理程序就可以采用该对象上的函数来对请求作出响应。
+```js
+//server.js
+let http = require("http");
+let url = require('url');
+let querystring = require('querystring');
+
+function start(route, handler) {
+  function onRequest(request, response) {
+
+    pathname = url.parse(request.url).pathname;
+
+    route(pathname, handler, response);
+  }
+
+  http.createServer(onRequest).listen(9999);
+  console.log("Server has started at 9999.");
+}
+exports.start = start
+```
+```js
+// route.js
+
+function route(pathname, handler, response) {
+    console.log("About to route a request for " + pathname);
+
+    if(typeof handler[pathname] === 'function'){
+        return handler[pathname](response);        //调用路由处理函数
+    }else{
+        console.log("No request handler found for " + pathname);
+        response.writeHead(404, {"Content-Type": "text/plain"});
+        response.write("404 Not found");
+        response.end();
+    }
+  }
+  
+exports.route = route;
+```
+
+```js
+// requestHandlers.js
+function start(response) {
+    console.log("Request handler 'start' was called.");
+    
+    setTimeout(function(){
+        response.writeHead(200, {'Content-Type':'text/plain'});
+        response.write('Hello start!');
+        response.end();
+    }, 10000);
+}
+  
+function upload(response) {
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("<h1>Hello Upload!</h1>");
+    response.end();
+}  
+exports.start = start;
+exports.upload = upload;
+```
+**现在一切好像没问题了，那接下来就是实际任务了。**
 
 
+# 作业(电子版文档)
 
+## 1. 在自己计算机搭建NodeJS开发环境
+* 安装NodeJS，官网下载
+* 搞清楚、会用nvm工具进行NodeJS版本管理
+* 详细了解、会使用npm进行模块安装
 
+## 2. 完成讲义中的示例代码
+* 深刻理解回调函数
+* 深刻理解阻塞与非阻塞
+* 熟练掌握NodeJS内置的http, url, querystring模块，已经相关的方法。

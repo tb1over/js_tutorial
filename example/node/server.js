@@ -12,17 +12,18 @@ console.log('Server running at 8888');
 */
 
 let http = require("http");
+let url = require('url');
+let querystring = require('querystring');
 
-function start() {
+function start(route, handler) {
   function onRequest(request, response) {
-    console.log("Request received.");
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Hello World");
-    response.end();
+
+    pathname = url.parse(request.url).pathname;
+
+    route(pathname, handler, response);
   }
 
-  http.createServer(onRequest).listen(8888);
-  console.log("Server has started at 8888.");
+  http.createServer(onRequest).listen(9999);
+  console.log("Server has started at 9999.");
 }
-
 exports.start = start
