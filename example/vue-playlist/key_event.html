@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘Event</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="vue-app">
+        <h1>键盘Events</h1>
+        <label for="">姓名:</label>
+        <input type="text" v-on:keyup.enter="logName">  <!-- 修饰符-->
+        <label for="">年龄:</label>
+        <input type="text" v-on:keyup="logAge">
+
+        <label for="">职业:</label>
+        <input type="text" v-on:keyup.alt.enter="logWork"> <!--修饰符叠加-->
+    </div>
+    <script src="key_event.js"></script>
+</body>
+</html>

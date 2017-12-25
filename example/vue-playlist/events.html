@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="vue-app">
+        <h1>Events</h1>
+
+        <!-- 
+        <button v-on:click="age++">长一岁</button>
+        <button v-on:click="age--">减一岁</button>
+        -->
+        <button @click="add()">长一岁</button>
+        <button v-on:click="sub()">减一岁</button>
+
+        <button @dblclick="add(10)">长十岁</button>  <!-- 双击事件绑定-->
+        <button v-on:dblclick="sub(10)">减十岁</button>
+        <button v-on:dblclick.once="sub(10)">减十岁(只能点一次)</button>
+        <p>My age is: {{age}}</p>
+
+        <div id="canvas" @mousemove="updateXY">   <!-- 鼠标事件绑定-->
+            {{x}}, {{y}}  -   <span v-on:mousemove.stop="">Stop Moving</span>          <!-- 阻止事件冒泡-->          
+                              <!-- <span v-on:mousemove="stopMoving">Stop Moving</span> -->
+        </div>  
+        
+        <!-- 阻止模式跳转-->
+        <a v-on:click.prevent="alert()" href="http://sjxy.nxnu.edu.cn">宁夏师范学院数学与计算机科学学院</a>
+    </div>
+
+    <script src="events.js"></script>
+</body>
+</html>

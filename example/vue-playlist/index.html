@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    
+    <!-- vue-app 根容器-->
+    <div id="vue-app">
+        <h1>{{greet("afternoon")}}</h1>
+        <p>Name:{{name}}</p>
+        <p>Job:{{job}}</p>
+
+        <!--属性绑定-->
+        <a v-bind:href="website">宁夏师范学院数学与计算机科学学院</a>
+        <input type="text" name="name" v-bind:value="name">
+        <p v-html="websiteTag"></p>
+
+        
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
