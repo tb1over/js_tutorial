@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="vue-app">
+        <h1>动态绑定CSS Class</h1>
+        
+        <h2>示例一</h2>
+        <h2>示例一</h2>
+        <div v-bind:class="{changeColor:changeColor}" v-on:click="changeColor = !changeColor">
+            <span>Henry</span>
+        </div>
+
+        <h2>示例二</h2>
+        <button v-on:click="changeColor=!changeColor">Chang Color</button>
+        <button v-on:click="changeLength=!changeLength">Change Length</button>
+        <div v-bind:class="compareClasses">
+            <span>Henry too</span>
+        </div>
+    </div>
+    <script src="10 css.js"></script>
+</body>
+</html>

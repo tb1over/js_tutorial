@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computed 计算属性</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="vue-app">
+        <h1>计算属性</h1>
+        <button v-on:click="a++">Add to A</button>
+        <button v-on:click="b++">Add to B</button>
+
+        <p>A -- {{a}}</p>
+        <p>B -- {{b}}</p>
+
+        <p>Age + A = {{addToA}}</p>
+        <p>Age + B = {{addToB}}</p>
+    </div>
+
+    <script src="09 computed.js"></script>
+</body>
+</html>
