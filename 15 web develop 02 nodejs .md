@@ -741,15 +741,58 @@ function start(response, postData){
 function style(response, postData){
     ......
 }
-
+......
 function upload(response, postData) {
     console.log(decodeURIComponent(postData));
+    let userInfo = decodeURIComponent(postData);        //编码转换
+    let content = `             // 响应的HTML代码写在了后台逻辑中
+        <!DOCTYPE html>         // 借助MVC， 这部分代码应该在视图模板中(jade...)
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>用户信息</title>
+            <link href="style.css" rel="stylesheet" type="text/css"/> 
+        </head>
+        <body>
+            <div class="wrap">
+            <h2>用户信息</h2>
+                昵称: ${querystring.parse(userInfo).nickname}<br />
+                邮箱: ${querystring.parse(userInfo).email}<br />
+                生日: ${querystring.parse(userInfo).birthday}<br />
+                爱好: ${querystring.parse(userInfo).interest}<br />
+        
+                <div class="copyright">
+                    <a title="数学与计算机科学学院" href="#">NXNU</a>
+                    <span>V0.1</span>
+                    <span>前端页面实例</span>
+                </div>
+            </div>
+        
+        </body>
+        </html>
+    `;
     response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("<h1>Hello Upload!</h1>");
+    response.write(content);
     response.end();
 }
 ......
 ```
+OK, 现在咱们完成了用户注册(form提交)，还完成了对POST数据的处理。
+
+# 7.文件上传
+上述form表单上传使用的方法很原始，安全性等各方面欠缺。可以使用第三方模块formidable。还记得怎么安装第三方模块吗？上节课作业关于npm的。
+## 7.1 安装formidable模块
+```js
+npm install formidable
+```
+
+## 7.2 formidable官方例子解析
+安装完成之后可以查看相应的例子(README.md)
+
+## 7.3 使用formidable模块重构上述表单提交程序
+
+## 7.4 使用formidable模块完善头像上传功能
+
 
 
 # 作业(电子版文档)
@@ -764,3 +807,5 @@ function upload(response, postData) {
 * 深刻理解回调函数
 * 深刻理解阻塞与非阻塞
 * 熟练掌握NodeJS内置的http, url, querystring模块，已经相关的方法。
+
+## 3.完成 7.3 与 7.4

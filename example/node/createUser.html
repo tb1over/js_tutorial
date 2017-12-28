@@ -26,7 +26,14 @@
             </select>
             <br/> 密码:
             <input type="password" class="text" name="password">
-            <br/>
+            <br/> 
+            <!-- <input type="file" name="avatar" multiple="multiple"> -->
+            <div class="report-file">
+                <span>请上传头像…</span>
+                <input tabindex="3" size="3" name="avatar" class="file-prew" type="file" onchange="document.getElementById('textName').value=this.value">
+           </div>
+           <input type="text" id="textName" style="height: 28px;border:1px solid #f1f1f1" />
+
             <input type="submit" class="btn" value="提交">
             <input type="reset" class="btn" value="重置">
         </form>
