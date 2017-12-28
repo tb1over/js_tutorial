@@ -1,4 +1,5 @@
 const fs = require('fs');
+const querystring = require('querystring');
 //路由处理程序
 
 function start(response, postData) {
@@ -26,6 +27,8 @@ function start(response, postData) {
   
 function upload(response, postData) {
     console.log(decodeURIComponent(postData));
+    let userInfo = decodeURIComponent(postData);        //编码转换
+    console.log(querystring.parse(userInfo).nickname);
     response.writeHead(200, {"Content-Type": "text/html"});
     response.write("<h1>Hello Upload!</h1>");
     response.end();

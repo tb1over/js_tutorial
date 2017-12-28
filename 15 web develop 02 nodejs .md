@@ -714,6 +714,44 @@ Node.js会将POST数据拆分成很多小的数据块，然后通过触发特定
 ......
 ```
 
+```js
+// route.js
+function route(pathname, handler, response, postData) {
+    console.log("About to route a request for " + pathname);
+
+    if(typeof handler[pathname] === 'function'){
+        return handler[pathname](response, postData);        //调用路由处理函数
+    }else{
+        console.log("No request handler found for " + pathname);
+        response.writeHead(404, {"Content-Type": "text/plain"});
+        response.write("404 Not found");
+        response.end();
+    }
+  } 
+  ......
+```
+
+```js
+// requestHandler.js
+......
+function start(response, postData){
+    ......
+}
+
+function style(response, postData){
+    ......
+}
+
+function upload(response, postData) {
+    console.log(decodeURIComponent(postData));
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("<h1>Hello Upload!</h1>");
+    response.end();
+}
+......
+```
+
+
 # 作业(电子版文档)
 
 ## 1. 在自己计算机搭建NodeJS开发环境
