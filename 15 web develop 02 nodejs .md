@@ -21,6 +21,12 @@
     - [5.4 让请求处理程序作出响应](#54-让请求处理程序作出响应)
     - [5.5 阻塞与非阻塞](#55-阻塞与非阻塞)
     - [5.6 以非阻塞操作进行请求响应](#56-以非阻塞操作进行请求响应)
+- [6 完成表单提交功能](#6-完成表单提交功能)
+    - [6.1 用户界面设计](#61-用户界面设计)
+    - [6.2 代码重构](#62-代码重构)
+        - [6.2.1 页面显示](#621-页面显示)
+        - [6.2.2 CSS文件处理](#622-css文件处理)
+    - [6.3 POST请求处理](#63-post请求处理)
 - [作业(电子版文档)](#作业电子版文档)
     - [1. 在自己计算机搭建NodeJS开发环境](#1-在自己计算机搭建nodejs开发环境)
     - [2. 完成讲义中的示例代码](#2-完成讲义中的示例代码)
@@ -449,8 +455,8 @@ function start() {
     }, 10000);
     return res;
 }
-......
 ```
+
 会发生什么事情呢？
 
 不再阻塞了，但是请求/或者/start没有得到正确的输出结果。
@@ -519,6 +525,194 @@ exports.upload = upload;
 ```
 **现在一切好像没问题了，那接下来就是实际任务了。**
 
+# 6 完成表单提交功能
+要求：用户注册页面，将用户输入内容通过POST请求提交到server端处理，server接收到请求之后，再将内容展示到浏览器中。
+## 6.1 用户界面设计
+```html
+<!-- createUser.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+	<link href="style.css" rel="stylesheet" type="text/css"/> 
+</head>
+<body>
+    <div class="wrap">
+    <h2>用户注册</h2>
+    <form method="post" class="form" action="/upload">
+        昵称:<input type="text" class="text" name="nickname"> <br />
+        邮箱:<input type="text" class="text" name="email"><br/>
+        生日:<input type="date" value="2017-12-28" class="text" name="birthday"><br/>
+        爱好:<select class="text" style="height:32px;width:248px">
+                <option value="read">看书</option>
+                <option value="travel" selected="selected">旅游</option>
+                <option value="sport">运动</option>
+                <option value="shopping">购物</option>
+			</select> <br/>
+        密码:<input type="password" class="text" name="password"><br/>
+        <input type="submit" class="btn" value="提交">
+        <input type="reset" class="btn" value="重置">
+    </form>
+    <div class="copyright">
+        <a title="官方网站" href="#">NXSF</a>
+        <span>V0.1</span>
+        <span>前端页面实例</span>
+    </div>
+    </div>
+</body>
+</html>
+```
+
+```css
+/*style.css*/
+ * {
+     padding: 0;
+     margin: 0;
+ }
+
+ .wrap {
+     width: 340px;
+     margin: 0 auto;
+ }
+
+ body {
+     font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     font-size: 16px;
+     padding: 5px;
+ }
+
+ .form {
+     padding: 15px;
+     font-size: 16px;
+ }
+
+ .form .text {
+     padding: 3px;
+     margin: 2px 10px;
+     width: 240px;
+     height: 24px;
+     line-height: 28px;
+     border: 1px solid #D4D4D4;
+ }
+
+ .form .btn {
+     margin: 6px;
+     padding: 6px;
+     font-size: 16px;
+     border: 1px solid #D4D4D4;
+     cursor: pointer;
+     background: #eee;
+ }
+
+ a {
+     color: #868686;
+     cursor: pointer;
+ }
+
+ a:hover {
+     text-decoration: underline;
+ }
+
+ h2 {
+     color: #4388CE;
+     font-weight: 400;
+     padding: 6px 0;
+     margin: 6px 0;
+     font-size: 28px;
+     border-bottom: 1px solid #eee;
+ }
+
+ div .copyright {
+     margin: 8px;
+ }
+
+ .copyright {
+     margin-top: 24px;
+     padding: 12px 0;
+     border-top: 1px solid #eee;
+ }
+```
+## 6.2 代码重构
+### 6.2.1 页面显示
+对/和/start请求，请求处理函数应该向浏览器响应上述的HTML与CSS文件，接受用户输入。代码重构如下：
+```js
+//requestHandlers.js
+
+......
+const fs = require('fs');       //file system
+
+function start(response) {
+    console.log("Request handler 'start' was called.");
+    let path = './createUser.html';
+    fs.readFile(path, (err, data) => {      //异步读取文件
+        if(err){
+            response.writeHead(404, {'Content-Type':'text/html'});
+            response.end('<h1>服务器内部错误！</h1>');
+        }else{
+            response.writeHead(200, {'Content-Type':'text/html'});
+            response.write(data);
+            response.end();
+        }
+    });
+}
+......
+```
+### 6.2.2 CSS文件处理
+在HTML文件中，通过```<link href="style.css" rel="stylesheet" type="text/css"/>```加了样式文件，在浏览器渲染HTML过程中，向Server请求style.css文件。请求路径为"/style.css"。所以需要增加请求处理函数以及相应的流程.
+```js
+//index.js
+......
+handler['/style.css'] = requestHandlers.style;
+......
+```
+
+```js
+// requestHandlers.js
+......
+//仅仅演示方便，用来处理样式
+function style(response){
+    let pathname = './style.css';
+    fs.readFile(pathname, function(err, data){
+        if(err){
+            response.end('<h1>500服务器内部错误!</h1>');
+        }else{
+            response.writeHead(200, {'Content-Type':'text/css'});
+            response.end(data);
+        }
+    });
+}
+......
+```
+## 6.3 POST请求处理
+当用户提交表单时，触发/upload请求处理程序处理POST请求的问题。那么该怎么处理这个POST请求呢？采用异步回调来实现非阻塞地处理POST请求的数据。
+
+Node.js会将POST数据拆分成很多小的数据块，然后通过触发特定的事件，将这些小数据块传递给回调函数。这里的特定的事件有data事件（表示新的小数据块到达了）以及end事件（表示所有的数据都已经接收完毕）
+
+
+需要告诉Node.js当这些事件触发的时候，回调哪些函数。怎么告诉呢？ 通过在request对象上注册监听器（listener） 来实现。这里的request对象是每次接收到HTTP请求时候，都会把该对象传递给onRequest回调函数。
+
+那么接下来，在Server中处理data和end事件的回调函数，然后将解析出来的数据传递给请求处理函数。
+```js
+//server.js
+......
+  function onRequest(request, response) {
+
+    pathname = url.parse(request.url).pathname;
+    
+    let postData = '';
+    request.setEncoding('utf8');
+    
+    request.addListener('data', dataChunk =>{
+      postData += dataChunk;
+    });
+
+    request.addListener('end', () => {
+      route(pathname, handler, response, postData);
+    });
+  }
+......
+```
 
 # 作业(电子版文档)
 

@@ -7,4 +7,6 @@ handler['/'] = requestHandlers.start;
 handler['/start'] = requestHandlers.start;
 handler['/upload'] = requestHandlers.upload;
 
+handler['/style.css'] = requestHandlers.style;
+
 server.start(router.route, handler);

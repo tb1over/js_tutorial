@@ -19,8 +19,17 @@ function start(route, handler) {
   function onRequest(request, response) {
 
     pathname = url.parse(request.url).pathname;
+    
+    let postData = '';
+    request.setEncoding('utf8');
+    
+    request.addListener('data', dataChunk =>{
+      postData += dataChunk;
+    });
 
-    route(pathname, handler, response);
+    request.addListener('end', () => {
+      route(pathname, handler, response, postData);
+    });
   }
 
   http.createServer(onRequest).listen(9999);
