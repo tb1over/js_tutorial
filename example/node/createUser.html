@@ -9,8 +9,8 @@
 
 <body>
     <div class="wrap">
-        <h2>用户注册</h2>
-        <form method="post" class="form" action="/upload">
+        <h2>用户注册</h2>  <!-- enctype="multipart/form-data" formidable用-->
+        <form method="post" class="form" action="/upload" enctype="multipart/form-data">
             昵称:
             <input type="text" class="text" name="nickname">
             <br /> 邮箱:
@@ -30,7 +30,9 @@
             <!-- <input type="file" name="avatar" multiple="multiple"> -->
             <div class="report-file">
                 <span>请上传头像…</span>
-                <input tabindex="3" size="3" name="avatar" class="file-prew" type="file" onchange="document.getElementById('textName').value=this.value">
+                <input tabindex="3" size="3" name="avatar" class="file-prew" type="file" 
+                    onchange="document.getElementById('textName').value=this.value"
+                    multiple="multiple">  <!-- multiple="multiple" formidable用-->
            </div>
            <input type="text" id="textName" style="height: 28px;border:1px solid #f1f1f1" />
 

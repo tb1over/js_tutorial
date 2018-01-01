@@ -9,4 +9,6 @@ handler['/upload'] = requestHandlers.upload;
 
 handler['/style.css'] = requestHandlers.style;
 
+handler['/showImage'] = requestHandlers.showImage;
+
 server.start(router.route, handler);
