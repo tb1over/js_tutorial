@@ -32,10 +32,11 @@
     - [7.2 formidable官方例子解析](#72-formidable官方例子解析)
     - [7.3 使用formidable模块重构上述表单提交程序](#73-使用formidable模块重构上述表单提交程序)
     - [7.4 使用formidable模块完善头像上传功能](#74-使用formidable模块完善头像上传功能)
-- [作业(电子版文档)](#作业电子版文档)
+- [8 作业(电子版文档)](#8-作业电子版文档)
     - [1. 在自己计算机搭建NodeJS开发环境](#1-在自己计算机搭建nodejs开发环境)
     - [2. 完成讲义中的示例代码](#2-完成讲义中的示例代码)
     - [3.POST请求处理](#3post请求处理)
+- [9 参考资料](#9-参考资料)
 
 <!-- /TOC -->
 
@@ -801,7 +802,7 @@ npm install formidable
 
 
 
-# 作业(电子版文档)
+# 8 作业(电子版文档)
 
 ## 1. 在自己计算机搭建NodeJS开发环境
 * 安装NodeJS，官网下载
@@ -812,8 +813,14 @@ npm install formidable
 ## 2. 完成讲义中的示例代码
 * 深刻理解回调函数
 * 深刻理解阻塞与非阻塞
-* 熟练掌握NodeJS内置的http, url, querystring模块，已经相关的方法。
+* 熟练掌握NodeJS内置的http, url, querystring模块，以及相关的方法。
 
 ## 3.POST请求处理
 * 参照6的内容，完成POST表单提交处理。
 * 使用formidable完成7.3 与 7.4
+
+# 9 参考资料
+* [Node.Js 官网](https://nodejs.org/en/)
+* [Node.js v8.9.3 文档](http://nodejs.cn/api/)
+* [Node入门](https://www.nodebeginner.org/index-zh-cn.html)
+* [formidable](https://npm.taobao.org/package/formidable)

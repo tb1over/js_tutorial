@@ -16,8 +16,6 @@ let url = require('url');
 let querystring = require('querystring');
 let formidable = require('formidable');
 
-let util = require('util');
-
 function start(route, handler) {
   function onRequest(request, response) {
 
