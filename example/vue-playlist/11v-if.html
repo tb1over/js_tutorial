@@ -9,7 +9,15 @@
 <body>
     <div id="vue-app">
         <h1>指令 v-if</h1>
-        
+        <button v-on:click="error=!error">Toggle Error</button>
+        <button v-on:click="success=!success">Toggle Sucess</button>
+
+        <!--<p v-if="error">网络链接错误：404</p>
+        <p v-else-if="success">网络链接成功：200</p> -->
+
+        <p v-show="error">网络链接错误：404</p>        <!--DOM中占位 display:none-->
+        <p v-show="success">网络链接成功：200</p>
+
     </div>
     <script src="11v-if.js"></script>
 </body>
