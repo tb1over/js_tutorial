@@ -2,57 +2,57 @@
 <!-- TOC -->
 
 - [1. 服务端JavaScript - NodeJS](#1-服务端javascript---nodejs)
-    - [1.1 Long long ago](#11-long-long-ago)
-    - [1.2 Now](#12-now)
-    - [1.3 NodeJS](#13-nodejs)
-    - [1.4 安装](#14-安装)
-- [2.  Hello World](#2--hello-world)
+    - [1.1. Long long ago](#11-long-long-ago)
+    - [1.2. Now](#12-now)
+    - [1.3. NodeJS](#13-nodejs)
+    - [1.4. 安装](#14-安装)
+- [2. Hello World](#2-hello-world)
 - [3. 完整的基于NodeJS的web应用](#3-完整的基于nodejs的web应用)
 - [4. 一个基础的HTTP服务器](#4-一个基础的http服务器)
-    - [4.1 分析一下这个简单的程序](#41-分析一下这个简单的程序)
-        - [4.2.1 服务器是如何处理请求的](#421-服务器是如何处理请求的)
-        - [4.2.2 服务端的模块放在哪里?](#422-服务端的模块放在哪里)
+    - [4.1. 分析一下这个简单的程序](#41-分析一下这个简单的程序)
+        - [4.1.1. 服务器是如何处理请求的](#411-服务器是如何处理请求的)
+        - [4.1.2. 服务端的模块放在哪里?](#412-服务端的模块放在哪里)
 - [5. 路由(router)](#5-路由router)
-    - [5.1 什么是路由(router)](#51-什么是路由router)
-        - [5.1.1 网络中的路由器](#511-网络中的路由器)
-        - [5.1.2 Web开发中的路由(router)](#512-web开发中的路由router)
-    - [5.2 创建路由文件](#52-创建路由文件)
-    - [5.3 路由给真正的请求处理程序](#53-路由给真正的请求处理程序)
-    - [5.4 让请求处理程序作出响应](#54-让请求处理程序作出响应)
-    - [5.5 阻塞与非阻塞](#55-阻塞与非阻塞)
-    - [5.6 以非阻塞操作进行请求响应](#56-以非阻塞操作进行请求响应)
-- [6 完成表单提交功能](#6-完成表单提交功能)
-    - [6.1 用户界面设计](#61-用户界面设计)
-    - [6.2 代码重构](#62-代码重构)
-        - [6.2.1 页面显示](#621-页面显示)
-        - [6.2.2 CSS文件处理](#622-css文件处理)
-    - [6.3 POST请求处理](#63-post请求处理)
-- [7.文件上传](#7文件上传)
-    - [7.1 安装formidable模块](#71-安装formidable模块)
-    - [7.2 formidable官方例子解析](#72-formidable官方例子解析)
-    - [7.3 使用formidable模块重构上述表单提交程序](#73-使用formidable模块重构上述表单提交程序)
-    - [7.4 使用formidable模块完善头像上传功能](#74-使用formidable模块完善头像上传功能)
-- [8 作业(电子版文档)](#8-作业电子版文档)
-    - [1. 在自己计算机搭建NodeJS开发环境](#1-在自己计算机搭建nodejs开发环境)
-    - [2. 完成讲义中的示例代码](#2-完成讲义中的示例代码)
-    - [3.POST请求处理](#3post请求处理)
-- [9 参考资料](#9-参考资料)
+    - [5.1. 什么是路由(router)](#51-什么是路由router)
+        - [5.1.1. 网络中的路由器](#511-网络中的路由器)
+        - [5.1.2. Web开发中的路由(router)](#512-web开发中的路由router)
+    - [5.2. 创建路由文件](#52-创建路由文件)
+    - [5.3. 路由给真正的请求处理程序](#53-路由给真正的请求处理程序)
+    - [5.4. 让请求处理程序作出响应](#54-让请求处理程序作出响应)
+    - [5.5. 阻塞与非阻塞](#55-阻塞与非阻塞)
+    - [5.6. 以非阻塞操作进行请求响应](#56-以非阻塞操作进行请求响应)
+- [6. 完成表单提交功能](#6-完成表单提交功能)
+    - [6.1. 用户界面设计](#61-用户界面设计)
+    - [6.2. 代码重构](#62-代码重构)
+        - [6.2.1. 页面显示](#621-页面显示)
+        - [6.2.2. CSS文件处理](#622-css文件处理)
+    - [6.3. POST请求处理](#63-post请求处理)
+- [7. 文件上传](#7-文件上传)
+    - [7.1. 安装formidable模块](#71-安装formidable模块)
+    - [7.2. formidable官方例子解析](#72-formidable官方例子解析)
+    - [7.3. 使用formidable模块重构上述表单提交程序](#73-使用formidable模块重构上述表单提交程序)
+    - [7.4. 使用formidable模块完善头像上传功能](#74-使用formidable模块完善头像上传功能)
+- [8. 作业(电子版文档)](#8-作业电子版文档)
+    - [8.1. 在自己计算机搭建NodeJS开发环境](#81-在自己计算机搭建nodejs开发环境)
+    - [8.2. 完成讲义中的示例代码](#82-完成讲义中的示例代码)
+    - [8.3. POST请求处理](#83-post请求处理)
+- [9. 参考资料](#9-参考资料)
 
 <!-- /TOC -->
 
 # 1. 服务端JavaScript - NodeJS
-## 1.1 Long long ago
+## 1.1. Long long ago
 JavaScript最早是运行在浏览器中，然而浏览器只是提供了一个上下文，它定义了使用JavaScript可以做什么，但并没有“说”太多关于JavaScript语言本身可以做什么。事实上，JavaScript是一门“完整”的语言： 它可以使用在不同的上下文中，其能力与其他同类语言相比有过之而无不及
-## 1.2 Now
+## 1.2. Now
 JavaScript脱离了浏览器环境
-## 1.3 NodeJS
+## 1.3. NodeJS
 Node.js事实上就是另外一种上下文，它允许在后端（脱离浏览器环境）运行JavaScript代码。
 
 要实现在后台运行JavaScript代码，代码需要先被解释然后正确的执行。Node.js的原理正是如此，它使用了Google的V8虚拟机（Google的Chrome浏览器使用的JavaScript执行环境），来解释和执行JavaScript代码。
-## 1.4 安装
+## 1.4. 安装
 NodeJS有Windows版本，Linux版本，Mac版本，请根据自己操作系统安装相应版本。具体参照[Nodejs官网](https://nodejs.org/en/) 或者[Nodejs中文网](http://nodejs.cn/)
 
-# 2.  Hello World
+# 2. Hello World
 ```js
 // helloworld.js
 // node helloworld.js
@@ -93,7 +93,7 @@ console.log('Server running at 8888');
 ```
 **懵了吗？**
 
-## 4.1 分析一下这个简单的程序
+## 4.1. 分析一下这个简单的程序
 - 第一行请求（require）Node.js自带的 http 模块，并且把它赋值给 http 变量。 关于Nodejs HTTP模块详情，请查阅 - [HTTP 模块API文档](http://nodejs.cn/api/http.html#http_http).
 
 - 接下来调用http模块提供的函数： createServer 。这个函数会返回一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数，指定这个HTTP服务器监听的端口号。
@@ -149,7 +149,7 @@ http.createServer(onRequest).listen(8888);
 
 - 这个就是传说中的 回调 。我们给某个方法传递了一个函数，这个方法在有相应事件发生时调用这个函数来进行 回调 。 
 
-### 4.2.1 服务器是如何处理请求的
+### 4.1.1. 服务器是如何处理请求的
 
 - 当回调启动，onRequest() 函数被触发的时候，有两个参数被传入： request 和 response 。
 
@@ -161,7 +161,7 @@ http.createServer(onRequest).listen(8888);
 
 关于request, response 详情，请查阅[HTTP模块]((http://nodejs.cn/api/http.html#http_http))。这两个对象就是HTTP request, response的封装。request对象封装了HTTP请求，我们调用request对象的属性和方法就可以拿到所有HTTP请求的信息；response对象封装了HTTP响应，我们操作response对象的方法，就可以把HTTP响应返回给浏览器。
 
-### 4.2.2 服务端的模块放在哪里?
+### 4.1.2. 服务端的模块放在哪里?
 接下来，对server.js进行一次封装，把server.js变成一个真正的Node.js模块，使它可以被其他文件调用。
 
 ```js
@@ -195,10 +195,10 @@ var server = require("./server");
 server.start();
 ```
 # 5. 路由(router)
-## 5.1 什么是路由(router)
-### 5.1.1 网络中的路由器
+## 5.1. 什么是路由(router)
+### 5.1.1. 网络中的路由器
 路由器通常连接两个或多个由IP子网或点到点协议标识的逻辑端口，至少拥有1个物理端口。路由器根据收到数据包中的网络层地址以及路由器内部维护的路由表决定输出端口以及下一跳地址，并且重写链路层数据包头实现转发数据包。路由器通过动态维护路由表来反映当前的网络拓扑，并通过网络上其他路由器交换路由和链路信息来维护路由表。
-### 5.1.2 Web开发中的路由(router)
+### 5.1.2. Web开发中的路由(router)
 router可以理解为一个容器，或者说一种机制，它管理了一组route。简单来说，route只是进行了URL和函数的映射，而在当接收到一个URL之后，去路由映射表中查找相应的函数，这个过程是由router来处理的。一句话概括就是 “The router routes you to a route“。
 ```
 https://www.imooc.com/learn/488
@@ -258,7 +258,7 @@ exports.start = start
 
 下面将来自/start和/upload的请求使用不同的代码来处理。
 
-## 5.2 创建路由文件
+## 5.2. 创建路由文件
 
 * 1.建立名为router.js的文件
 ```js
@@ -301,7 +301,7 @@ var router = require('./router');
 server.start(router.route);
 ```
 
-## 5.3 路由给真正的请求处理程序
+## 5.3. 路由给真正的请求处理程序
 
 针对不同的URL有不同的处理方式。例如处理/start的“业务逻辑”就应该和处理/upload的不同。
 
@@ -360,7 +360,7 @@ function route(pathname, handler) {
 exports.route = route;
 ```
 
-## 5.4 让请求处理程序作出响应
+## 5.4. 让请求处理程序作出响应
 目前的程序，不论请求路径是/start还是/upload，页面响应都是hello world!  
 
 Too young too simple ...
@@ -418,7 +418,7 @@ function start(route, handle) {
 ...
 ```
 **代码有问题吗？？看似没问题，但是涉及到了致命问题：**
-## 5.5 阻塞与非阻塞
+## 5.5. 阻塞与非阻塞
 修改一下代码,注意观察在访问/start 和/upload的现象，这个现象为什么会发生，就是因为阻塞。
 
 形象的说就是“它阻塞了所有其他的处理工作”。
@@ -470,7 +470,7 @@ function start() {
 
 **正确的姿势：不能使用返回值，给客户端的响应应该是在requstHandler模块中完成，而不是在server模块中响应**
 
-## 5.6 以非阻塞操作进行请求响应
+## 5.6. 以非阻塞操作进行请求响应
 继续重构：将response对象（从服务器的回调函数onRequest()获取）通过请求路由传递给请求处理程序。 随后，处理程序就可以采用该对象上的函数来对请求作出响应。
 ```js
 //server.js
@@ -532,9 +532,9 @@ exports.upload = upload;
 ```
 **现在一切好像没问题了，那接下来就是实际任务了。**
 
-# 6 完成表单提交功能
+# 6. 完成表单提交功能
 要求：用户注册页面，将用户输入内容通过POST请求提交到server端处理，server接收到请求之后，再将内容展示到浏览器中。
-## 6.1 用户界面设计
+## 6.1. 用户界面设计
 ```html
 <!-- createUser.html-->
 <!DOCTYPE html>
@@ -640,8 +640,8 @@ exports.upload = upload;
      border-top: 1px solid #eee;
  }
 ```
-## 6.2 代码重构
-### 6.2.1 页面显示
+## 6.2. 代码重构
+### 6.2.1. 页面显示
 对/和/start请求，请求处理函数应该向浏览器响应上述的HTML与CSS文件，接受用户输入。代码重构如下：
 ```js
 //requestHandlers.js
@@ -665,7 +665,7 @@ function start(response) {
 }
 ......
 ```
-### 6.2.2 CSS文件处理
+### 6.2.2. CSS文件处理
 在HTML文件中，通过```<link href="style.css" rel="stylesheet" type="text/css"/>```加了样式文件，在浏览器渲染HTML过程中，向Server请求style.css文件。请求路径为"/style.css"。所以需要增加请求处理函数以及相应的流程.
 ```js
 //index.js
@@ -691,7 +691,7 @@ function style(response){
 }
 ......
 ```
-## 6.3 POST请求处理
+## 6.3. POST请求处理
 当用户提交表单时，触发/upload请求处理程序处理POST请求的问题。那么该怎么处理这个POST请求呢？采用异步回调来实现非阻塞地处理POST请求的数据。
 
 Node.js会将POST数据拆分成很多小的数据块，然后通过触发特定的事件，将这些小数据块传递给回调函数。这里的特定的事件有data事件（表示新的小数据块到达了）以及end事件（表示所有的数据都已经接收完毕）
@@ -786,40 +786,40 @@ function upload(response, postData) {
 ```
 OK, 现在咱们完成了用户注册(form提交)，还完成了对POST数据的处理。
 
-# 7.文件上传
+# 7. 文件上传
 上述form表单上传使用的方法很原始，安全性等各方面欠缺。可以使用第三方模块formidable。还记得怎么安装第三方模块吗？上节课作业关于npm的。
-## 7.1 安装formidable模块
+## 7.1. 安装formidable模块
 ```js
 npm install formidable
 ```
 
-## 7.2 formidable官方例子解析
+## 7.2. formidable官方例子解析
 安装完成之后可以查看相应的例子(README.md)
 
-## 7.3 使用formidable模块重构上述表单提交程序
+## 7.3. 使用formidable模块重构上述表单提交程序
 
-## 7.4 使用formidable模块完善头像上传功能
+## 7.4. 使用formidable模块完善头像上传功能
 
 
 
-# 8 作业(电子版文档)
+# 8. 作业(电子版文档)
 
-## 1. 在自己计算机搭建NodeJS开发环境
+## 8.1. 在自己计算机搭建NodeJS开发环境
 * 安装NodeJS，官网下载
 * 建议的开发工具vscode
 * 搞清楚、会用nvm工具进行NodeJS版本管理
 * 详细了解、会使用npm进行模块安装
 
-## 2. 完成讲义中的示例代码
+## 8.2. 完成讲义中的示例代码
 * 深刻理解回调函数
 * 深刻理解阻塞与非阻塞
 * 熟练掌握NodeJS内置的http, url, querystring模块，以及相关的方法。
 
-## 3.POST请求处理
+## 8.3. POST请求处理
 * 参照6的内容，完成POST表单提交处理。
 * 使用formidable完成7.3 与 7.4
 
-# 9 参考资料
+# 9. 参考资料
 * [Node.Js 官网](https://nodejs.org/en/)
 * [Node.js v8.9.3 文档](http://nodejs.cn/api/)
 * [Node入门](https://www.nodebeginner.org/index-zh-cn.html)
