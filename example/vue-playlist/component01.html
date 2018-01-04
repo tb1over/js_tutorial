@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="vue-app">
+        <h1>component实例</h1>
+        <div id="example">
+            <!--01 -->
+            <!-- 
+            <my-component></my-component> 
+            -->
+
+            <!--02-->
+            <!--
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            -->
+
+            <!-- 03-->
+            <!--
+            <child message="hello"></child>
+            -->
+
+            <!--04 -->
+            <!--
+            <div>
+                <input type="text" v-model="parentMsg">
+                <br>
+                <child v-bind:my-message="parentMsg"></child>
+                <child my-message="hello"></child>
+            </div>
+            -->
+
+            <!-- 05 -->
+            <button-counter v-on:increment="incrementTotal"></button-counter>
+            <button-counter v-on:increment="incrementTotal"></button-counter>
+            <p>{{total}}</p>
+        </div>
+    </div>
+    <script src="component01.js"></script>
+</body>
+</html>
