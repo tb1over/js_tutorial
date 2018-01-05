@@ -43,7 +43,6 @@ function upload(response, request) {
     form.keepExtensions = true;
     form.parse(request, function (err, fields, files) {
         console.log(`fields:${fields.email}`);
-        console.log(`files:${files.avatar.path}`);
         fs.renameSync(files.avatar.path, './img/avatar.jpg');
 
             let content = `             
