@@ -9,18 +9,16 @@
 </head>
 
 <body>
-    <h1>初始化多个Vue实例化对象</h1>
+    <h1>初识Vue component</h1>
     <div id="vue-app-one">
-        <h2>{{title}}</h2>
-        <p>{{greet}}</p>
+        <greeting></greeting>
     </div>
 
     <div id="vue-app-two">
-        <h2>{{title}}</h2>
-        <p>{{greet}}</p>
-        <button v-on:click="changeTitle">修改App-one的title属性</button>
+        <greeting></greeting>
     </div>
-    <script src="14multi-vue-obj.js"></script>
+    
+    <script src="15component.js"></script>
 </body>
 
 </html>
