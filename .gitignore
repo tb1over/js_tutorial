@@ -1,2 +1,3 @@
 *.pdf
 /example/node/img/*
+/example/express/microblog/node_modules/*
