@@ -218,9 +218,9 @@ a web server includes several parts that control how web users access hosted fil
 
 At the most basic level, whenever a browser needs a file hosted on a web server, the browser requests the file via HTTP. When the request reaches the correct web server (hardware), the HTTP server (software) accepts request, finds the requested document (if it doesn't then sends page 404), and sends it back to the browser, also through HTTP.
 ## 4.1 IIS
-![](http://www.iislogs.com/images/iis-8.png)
+![](http://www.monitis.com/blog/wp-content/uploads/2012/03/iis7.jpg)
 ## 4.2 Tomcat
-![](http://tomcat.apache.org/images/tomcat.png)
+![](http://tomcat.apache.org/res/images/tomcat.png)
 
 ## 4.3 Apache
 ![](https://www.unixmen.com/wp-content/uploads/2015/03/Apache-http-server.png)
